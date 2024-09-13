@@ -167,13 +167,19 @@ namespace google_calendar_api.Services
           Id = req.Id,
           Summary = req.Summary,
           Description = req.Description,
-          Start=req.Start,
-          End=req.End
+          Start = new EventDateTime()
+          {
+            Date = req.Start
+          },
+          End = new EventDateTime()
+          {
+            Date = req.End
+          }
         };
 
         EventsResource.UpdateRequest updateRequest = service.Events.Update(updateEvent, req.CalendarId, req.Id);
-        Event createdEvent = updateRequest.Execute();
-        return createdEvent.Id;
+        Event updateRequestResult = updateRequest.Execute();
+        return updateRequestResult.Id;
       }
       catch (Exception e)
       {
@@ -234,7 +240,8 @@ namespace google_calendar_api.Services
           CreatedRaw = item.CreatedRaw,
           Creator = item.Creator,
           Description = item.Description,
-          End = item.End,
+          End = string.Format("{0:dd.MM.yyyy}", item.End.Date),
+          Start = string.Format("{0:dd.MM.yyyy}", item.Start.Date),
           EndTimeUnspecified = item.EndTimeUnspecified,
           ETag = item.ETag,
           EventType = item.EventType,
@@ -260,7 +267,7 @@ namespace google_calendar_api.Services
           Reminders = item.Reminders,
           Sequence = item.Sequence,
           Source = item.Source,
-          Start = item.Start,
+
           Status = item.Status,
           Summary = item.Summary,
           Transparency = item.Transparency,

@@ -14,8 +14,8 @@ namespace google_calendar_api.Models
     public DateTime? Created { get; set; }
     public string Summary { get; set; }
     public string Description { get; set; }
-    public EventDateTime Start { get; set; }
-    public EventDateTime End { get; set; }
+    public string Start { get; set; }
+    public string End { get; set; }
     public IEnumerable<EventAttendee> Attendees { get; set; }
     public IEnumerable<EventAttachment> Attachments { get; set; }
     public bool? AnyoneCanAddSelf { get; set; }
